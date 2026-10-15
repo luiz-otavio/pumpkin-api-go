@@ -48,5 +48,7 @@ func HandleCommand(commandId uint32, sender *pumpkin_plugin_command.CommandSende
 }
 
 func HandleTask(handlerId uint32, server *pumpkin_plugin_server.Server) {
-	// Not yet implemented in high-level API
+	if instance := api.GetInstance(); instance != nil {
+		instance.HandleTask(handlerId, server)
+	}
 }

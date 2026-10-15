@@ -16,6 +16,7 @@ type Plugin interface {
 	OnUnload(ctx *pumpkin_plugin_context.Context)
 	HandleEvent(eventId uint32, server *pumpkin_plugin_server.Server, event pumpkin_plugin_event.Event) pumpkin_plugin_event.Event
 	HandleCommand(commandId uint32, sender *pumpkin_plugin_command.CommandSender, server *pumpkin_plugin_server.Server, args *pumpkin_plugin_command.ConsumedArgs) int32
+	HandleTask(handlerId uint32, server *pumpkin_plugin_server.Server)
 }
 
 var instance Plugin
@@ -38,3 +39,4 @@ func (p *DefaultPlugin) HandleEvent(eventId uint32, server *pumpkin_plugin_serve
 func (p *DefaultPlugin) HandleCommand(commandId uint32, sender *pumpkin_plugin_command.CommandSender, server *pumpkin_plugin_server.Server, args *pumpkin_plugin_command.ConsumedArgs) int32 {
 	return 0
 }
+func (p *DefaultPlugin) HandleTask(handlerId uint32, server *pumpkin_plugin_server.Server) {}
