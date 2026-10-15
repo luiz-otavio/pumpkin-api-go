@@ -6,6 +6,9 @@
 package pumpkin_plugin_player
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_advancement"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_bedrock_packets"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_common"
@@ -28,8 +31,6 @@ import (
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_world"
 	witRuntime "go.bytecodealliance.org/pkg/wit/runtime"
 	witTypes "go.bytecodealliance.org/pkg/wit/types"
-	"runtime"
-	"unsafe"
 )
 
 type Hand = pumpkin_plugin_common.Hand
@@ -6444,7 +6445,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSetPassengers:
 		payload := packet.CSetPassengers()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(128))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPassengers
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		data252 := unsafe.Pointer(unsafe.SliceData((payload).Passengers))
 		pinner.Pin(data252)
@@ -6453,7 +6454,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerInventory:
 		payload := packet.CSetPlayerInventory()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(129))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerInventory
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).Slot
 		utf8253 := unsafe.Pointer(unsafe.StringData((payload).Item))
 		pinner.Pin(utf8253)
@@ -6462,7 +6463,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerTeam:
 		payload := packet.CSetPlayerTeam()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(130))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerTeam
 		utf8254 := unsafe.Pointer(unsafe.StringData((payload).TeamName))
 		pinner.Pin(utf8254)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).TeamName)))
@@ -6519,12 +6520,12 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSetSimulationDistance:
 		payload := packet.CSetSimulationDistance()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(131))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetSimulationDistance
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).SimulationDistance
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateTime:
 		payload := packet.CUpdateTime()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(132))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateTime
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).GameTime
 		slice264 := (payload).ClockUpdates
 		length266 := uint32(len(slice264))
@@ -6543,7 +6544,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTitleText:
 		payload := packet.CTitleText()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(133))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTitleText
 		utf8267 := unsafe.Pointer(unsafe.StringData((payload).Title))
 		pinner.Pin(utf8267)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Title)))
@@ -6551,14 +6552,14 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTitleAnimation:
 		payload := packet.CTitleAnimation()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(134))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTitleAnimation
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).FadeInTicks
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = (payload).StayTicks
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = (payload).FadeOutTicks
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CPlayShowDialog:
 		payload := packet.CPlayShowDialog()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(135))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CPlayShowDialog
 		utf8268 := unsafe.Pointer(unsafe.StringData((payload).Dialog))
 		pinner.Pin(utf8268)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Dialog)))
@@ -6566,7 +6567,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSoundEffect:
 		payload := packet.CSoundEffect()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(136))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSoundEffect
 		utf8269 := unsafe.Pointer(unsafe.StringData((payload).SoundEvent))
 		pinner.Pin(utf8269)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).SoundEvent)))
@@ -6581,7 +6582,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSpawnEntity:
 		payload := packet.CSpawnEntity()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(137))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSpawnEntity
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = int64(((payload).EntityUuid).High)
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 32)) = int64(((payload).EntityUuid).Low)
@@ -6600,11 +6601,11 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CStartConfiguration:
 
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(138))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CStartConfiguration
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CStopSound:
 		payload := packet.CStopSound()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(139))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CStopSound
 
 		switch (payload).SoundId.Tag() {
 		case witTypes.OptionNone:
@@ -6640,7 +6641,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CStoreCookie:
 		payload := packet.CStoreCookie()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(140))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CStoreCookie
 		utf8273 := unsafe.Pointer(unsafe.StringData((payload).Key))
 		pinner.Pin(utf8273)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Key)))
@@ -6652,7 +6653,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CSubtitle:
 		payload := packet.CSubtitle()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(141))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CSubtitle
 		utf8275 := unsafe.Pointer(unsafe.StringData((payload).Subtitle))
 		pinner.Pin(utf8275)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Subtitle)))
@@ -6660,7 +6661,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTabList:
 		payload := packet.CTabList()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(142))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTabList
 		utf8276 := unsafe.Pointer(unsafe.StringData((payload).Header))
 		pinner.Pin(utf8276)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Header)))
@@ -6672,7 +6673,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTagQueryResponse:
 		payload := packet.CTagQueryResponse()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(143))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTagQueryResponse
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).TransactionId
 		data278 := unsafe.Pointer(unsafe.SliceData((payload).NbtBytes))
 		pinner.Pin(data278)
@@ -6681,14 +6682,14 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTakeItemEntity:
 		payload := packet.CTakeItemEntity()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(144))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTakeItemEntity
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = (payload).CollectorEntityId
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = (payload).StackAmount
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTeleportEntity:
 		payload := packet.CTeleportEntity()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(145))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTeleportEntity
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = ((payload).Position).F0
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 32)) = ((payload).Position).F1
@@ -6722,7 +6723,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTestInstanceBlockStatus:
 		payload := packet.CTestInstanceBlockStatus()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(146))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTestInstanceBlockStatus
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = ((payload).Pos).F0
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = ((payload).Pos).F1
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = ((payload).Pos).F2
@@ -6746,7 +6747,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTickingState:
 		payload := packet.CTickingState()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(147))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTickingState
 		*(*float32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).TickRate
 		var result285 int32
 		if (payload).IsFrozen {
@@ -6758,12 +6759,12 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTickingStep:
 		payload := packet.CTickingStep()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(148))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTickingStep
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).TickSteps
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CTransfer:
 		payload := packet.CTransfer()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(149))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CTransfer
 		utf8286 := unsafe.Pointer(unsafe.StringData((payload).Host))
 		pinner.Pin(utf8286)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).Host)))
@@ -6772,13 +6773,13 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUnloadChunk:
 		payload := packet.CUnloadChunk()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(150))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUnloadChunk
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).X
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = (payload).Z
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAdvancements:
 		payload := packet.CUpdateAdvancements()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(151))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAdvancements
 		var result287 int32
 		if (payload).Reset {
 			result287 = 1
@@ -6838,7 +6839,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAttributes:
 		payload := packet.CUpdateAttributes()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(152))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAttributes
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		slice305 := (payload).Properties
 		length307 := uint32(len(slice305))
@@ -6871,7 +6872,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPos:
 		payload := packet.CUpdateEntityPos()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(153))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPos
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = ((payload).Delta).F0
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 32)) = ((payload).Delta).F1
@@ -6886,7 +6887,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPosRot:
 		payload := packet.CUpdateEntityPosRot()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(154))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPosRot
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = ((payload).Delta).F0
 		*(*float64)(unsafe.Add(unsafe.Pointer(returnArea), 32)) = ((payload).Delta).F1
@@ -6903,7 +6904,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityRot:
 		payload := packet.CUpdateEntityRot()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(155))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityRot
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = int8(int32((payload).Yaw))
 		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 21)) = int8(int32((payload).Pitch))
@@ -6917,7 +6918,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateMobEffect:
 		payload := packet.CUpdateMobEffect()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(156))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateMobEffect
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).EntityId
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = (payload).EffectId
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = (payload).Amplifier
@@ -6926,7 +6927,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateObjectives:
 		payload := packet.CUpdateObjectives()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(157))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateObjectives
 		utf8311 := unsafe.Pointer(unsafe.StringData((payload).ObjectiveName))
 		pinner.Pin(utf8311)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).ObjectiveName)))
@@ -6956,7 +6957,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateRecipes:
 		payload := packet.CUpdateRecipes()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(158))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateRecipes
 		data314 := unsafe.Pointer(unsafe.SliceData((payload).RawData))
 		pinner.Pin(data314)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).RawData)))
@@ -6964,7 +6965,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateScore:
 		payload := packet.CUpdateScore()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(159))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateScore
 		utf8315 := unsafe.Pointer(unsafe.StringData((payload).EntityName))
 		pinner.Pin(utf8315)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).EntityName)))
@@ -7009,7 +7010,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CWaypoint:
 		payload := packet.CWaypoint()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(160))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CWaypoint
 		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = int8(int32((payload).Operation))
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = int64((((payload).Waypoint).Identifier).High)
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 32)) = int64((((payload).Waypoint).Identifier).Low)
@@ -7072,7 +7073,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_CWorldEvent:
 		payload := packet.CWorldEvent()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(161))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_CWorldEvent
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).Event
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 20)) = ((payload).Location).F0
 		*(*int32)(unsafe.Add(unsafe.Pointer(returnArea), 24)) = ((payload).Location).F1
@@ -7088,12 +7089,12 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_StatusCPingResponse:
 		payload := packet.StatusCPingResponse()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(162))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_StatusCPingResponse
 		*(*int64)(unsafe.Add(unsafe.Pointer(returnArea), 16)) = (payload).Payload
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_StatusCStatusResponse:
 		payload := packet.StatusCStatusResponse()
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(163))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_StatusCStatusResponse
 		utf8321 := unsafe.Pointer(unsafe.StringData((payload).JsonResponse))
 		pinner.Pin(utf8321)
 		*(*uint32)(unsafe.Add(unsafe.Pointer(returnArea), (16 + 1*4))) = uint32(uint32(len((payload).JsonResponse)))
@@ -7101,7 +7102,7 @@ func (self *JavaPlayer) SendPacket(packet pumpkin_plugin_java_packets.Clientboun
 
 	case pumpkin_plugin_java_packets.ClientboundPacket_Unknown:
 
-		*(*int8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = int8(int32(164))
+		*(*uint8)(unsafe.Add(unsafe.Pointer(returnArea), 8)) = pumpkin_plugin_java_packets.ClientboundPacket_Unknown
 
 	default:
 		panic("unreachable")
@@ -8448,7 +8449,7 @@ func (self *BedrockPlayer) SendPacket(packet pumpkin_plugin_bedrock_packets.Clie
 						*(*int32)(unsafe.Add(unsafe.Pointer(base), (3 * 4))) = (payload).MetadataValue
 
 					case pumpkin_plugin_bedrock_packets.RecipeItemDescriptor_Tag:
-						payload := (element).Descriptor.Tag()
+						payload := (element).Descriptor.Tag_()
 						*(*int8)(unsafe.Add(unsafe.Pointer(base), 0)) = int8(int32(2))
 						utf8126 := unsafe.Pointer(unsafe.StringData(payload))
 						pinner.Pin(utf8126)
@@ -8652,7 +8653,7 @@ func (self *BedrockPlayer) SendPacket(packet pumpkin_plugin_bedrock_packets.Clie
 						*(*int32)(unsafe.Add(unsafe.Pointer(base), (3 * 4))) = (payload).MetadataValue
 
 					case pumpkin_plugin_bedrock_packets.RecipeItemDescriptor_Tag:
-						payload := (element).Descriptor.Tag()
+						payload := (element).Descriptor.Tag_()
 						*(*int8)(unsafe.Add(unsafe.Pointer(base), 0)) = int8(int32(2))
 						utf8156 := unsafe.Pointer(unsafe.StringData(payload))
 						pinner.Pin(utf8156)

@@ -6,6 +6,9 @@
 package wit_exports
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/exports/export_pumpkin_plugin_gametest_callbacks"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/exports/export_pumpkin_plugin_metadata"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/exports/export_wit_world"
@@ -27,8 +30,6 @@ import (
 	witAsync "go.bytecodealliance.org/pkg/wit/async"
 	witRuntime "go.bytecodealliance.org/pkg/wit/runtime"
 	witTypes "go.bytecodealliance.org/pkg/wit/types"
-	"runtime"
-	"unsafe"
 )
 
 var staticPinner = runtime.Pinner{}
@@ -15245,7 +15246,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSetPassengers:
 				payload := payload.CSetPassengers()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(128))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPassengers
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				data1710 := unsafe.Pointer(unsafe.SliceData((payload).Passengers))
 				pinner.Pin(data1710)
@@ -15254,7 +15255,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerInventory:
 				payload := payload.CSetPlayerInventory()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(129))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerInventory
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).Slot
 				utf81711 := unsafe.Pointer(unsafe.StringData((payload).Item))
 				pinner.Pin(utf81711)
@@ -15263,7 +15264,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerTeam:
 				payload := payload.CSetPlayerTeam()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(130))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetPlayerTeam
 				utf81712 := unsafe.Pointer(unsafe.StringData((payload).TeamName))
 				pinner.Pin(utf81712)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).TeamName)))
@@ -15320,12 +15321,12 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSetSimulationDistance:
 				payload := payload.CSetSimulationDistance()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(131))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSetSimulationDistance
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).SimulationDistance
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateTime:
 				payload := payload.CUpdateTime()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(132))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateTime
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).GameTime
 				slice1722 := (payload).ClockUpdates
 				length1724 := uint32(len(slice1722))
@@ -15344,7 +15345,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTitleText:
 				payload := payload.CTitleText()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(133))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTitleText
 				utf81725 := unsafe.Pointer(unsafe.StringData((payload).Title))
 				pinner.Pin(utf81725)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Title)))
@@ -15352,14 +15353,14 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTitleAnimation:
 				payload := payload.CTitleAnimation()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(134))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTitleAnimation
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).FadeInTicks
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = (payload).StayTicks
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = (payload).FadeOutTicks
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CPlayShowDialog:
 				payload := payload.CPlayShowDialog()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(135))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CPlayShowDialog
 				utf81726 := unsafe.Pointer(unsafe.StringData((payload).Dialog))
 				pinner.Pin(utf81726)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Dialog)))
@@ -15367,7 +15368,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSoundEffect:
 				payload := payload.CSoundEffect()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(136))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSoundEffect
 				utf81727 := unsafe.Pointer(unsafe.StringData((payload).SoundEvent))
 				pinner.Pin(utf81727)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).SoundEvent)))
@@ -15382,7 +15383,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSpawnEntity:
 				payload := payload.CSpawnEntity()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(137))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSpawnEntity
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = int64(((payload).EntityUuid).High)
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 48)) = int64(((payload).EntityUuid).Low)
@@ -15401,11 +15402,11 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CStartConfiguration:
 
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(138))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CStartConfiguration
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CStopSound:
 				payload := payload.CStopSound()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(139))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CStopSound
 
 				switch (payload).SoundId.Tag() {
 				case witTypes.OptionNone:
@@ -15441,7 +15442,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CStoreCookie:
 				payload := payload.CStoreCookie()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(140))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CStoreCookie
 				utf81731 := unsafe.Pointer(unsafe.StringData((payload).Key))
 				pinner.Pin(utf81731)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Key)))
@@ -15453,7 +15454,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CSubtitle:
 				payload := payload.CSubtitle()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(141))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CSubtitle
 				utf81733 := unsafe.Pointer(unsafe.StringData((payload).Subtitle))
 				pinner.Pin(utf81733)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Subtitle)))
@@ -15461,7 +15462,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTabList:
 				payload := payload.CTabList()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(142))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTabList
 				utf81734 := unsafe.Pointer(unsafe.StringData((payload).Header))
 				pinner.Pin(utf81734)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Header)))
@@ -15473,7 +15474,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTagQueryResponse:
 				payload := payload.CTagQueryResponse()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(143))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTagQueryResponse
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).TransactionId
 				data1736 := unsafe.Pointer(unsafe.SliceData((payload).NbtBytes))
 				pinner.Pin(data1736)
@@ -15482,14 +15483,14 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTakeItemEntity:
 				payload := payload.CTakeItemEntity()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(144))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTakeItemEntity
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = (payload).CollectorEntityId
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = (payload).StackAmount
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTeleportEntity:
 				payload := payload.CTeleportEntity()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(145))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTeleportEntity
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = ((payload).Position).F0
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 48)) = ((payload).Position).F1
@@ -15523,7 +15524,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTestInstanceBlockStatus:
 				payload := payload.CTestInstanceBlockStatus()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(146))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTestInstanceBlockStatus
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = ((payload).Pos).F0
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = ((payload).Pos).F1
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = ((payload).Pos).F2
@@ -15547,7 +15548,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTickingState:
 				payload := payload.CTickingState()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(147))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTickingState
 				*(*float32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).TickRate
 				var result1743 int32
 				if (payload).IsFrozen {
@@ -15559,12 +15560,12 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTickingStep:
 				payload := payload.CTickingStep()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(148))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTickingStep
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).TickSteps
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CTransfer:
 				payload := payload.CTransfer()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(149))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CTransfer
 				utf81744 := unsafe.Pointer(unsafe.StringData((payload).Host))
 				pinner.Pin(utf81744)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).Host)))
@@ -15573,13 +15574,13 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUnloadChunk:
 				payload := payload.CUnloadChunk()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(150))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUnloadChunk
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).X
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = (payload).Z
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAdvancements:
 				payload := payload.CUpdateAdvancements()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(151))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAdvancements
 				var result1745 int32
 				if (payload).Reset {
 					result1745 = 1
@@ -15639,7 +15640,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAttributes:
 				payload := payload.CUpdateAttributes()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(152))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateAttributes
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				slice1763 := (payload).Properties
 				length1765 := uint32(len(slice1763))
@@ -15672,7 +15673,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPos:
 				payload := payload.CUpdateEntityPos()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(153))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPos
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = ((payload).Delta).F0
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 48)) = ((payload).Delta).F1
@@ -15687,7 +15688,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPosRot:
 				payload := payload.CUpdateEntityPosRot()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(154))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityPosRot
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = ((payload).Delta).F0
 				*(*float64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 48)) = ((payload).Delta).F1
@@ -15704,7 +15705,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityRot:
 				payload := payload.CUpdateEntityRot()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(155))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateEntityRot
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = int8(int32((payload).Yaw))
 				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 37)) = int8(int32((payload).Pitch))
@@ -15718,7 +15719,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateMobEffect:
 				payload := payload.CUpdateMobEffect()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(156))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateMobEffect
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).EntityId
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = (payload).EffectId
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = (payload).Amplifier
@@ -15727,7 +15728,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateObjectives:
 				payload := payload.CUpdateObjectives()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(157))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateObjectives
 				utf81769 := unsafe.Pointer(unsafe.StringData((payload).ObjectiveName))
 				pinner.Pin(utf81769)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).ObjectiveName)))
@@ -15757,7 +15758,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateRecipes:
 				payload := payload.CUpdateRecipes()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(158))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateRecipes
 				data1772 := unsafe.Pointer(unsafe.SliceData((payload).RawData))
 				pinner.Pin(data1772)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).RawData)))
@@ -15765,7 +15766,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CUpdateScore:
 				payload := payload.CUpdateScore()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(159))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CUpdateScore
 				utf81773 := unsafe.Pointer(unsafe.StringData((payload).EntityName))
 				pinner.Pin(utf81773)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).EntityName)))
@@ -15810,7 +15811,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CWaypoint:
 				payload := payload.CWaypoint()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(160))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CWaypoint
 				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = int8(int32((payload).Operation))
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = int64((((payload).Waypoint).Identifier).High)
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 48)) = int64((((payload).Waypoint).Identifier).Low)
@@ -15873,7 +15874,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_CWorldEvent:
 				payload := payload.CWorldEvent()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(161))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_CWorldEvent
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).Event
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 36)) = ((payload).Location).F0
 				*(*int32)(unsafe.Add(unsafe.Pointer(exportReturnArea), 40)) = ((payload).Location).F1
@@ -15889,12 +15890,12 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_StatusCPingResponse:
 				payload := payload.StatusCPingResponse()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(162))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_StatusCPingResponse
 				*(*int64)(unsafe.Add(unsafe.Pointer(exportReturnArea), 32)) = (payload).Payload
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_StatusCStatusResponse:
 				payload := payload.StatusCStatusResponse()
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(163))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_StatusCStatusResponse
 				utf81779 := unsafe.Pointer(unsafe.StringData((payload).JsonResponse))
 				pinner.Pin(utf81779)
 				*(*uint32)(unsafe.Add(unsafe.Pointer(exportReturnArea), (32 + 1*4))) = uint32(uint32(len((payload).JsonResponse)))
@@ -15902,7 +15903,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 
 			case pumpkin_plugin_java_packets.ClientboundPacket_Unknown:
 
-				*(*int8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = int8(int32(164))
+				*(*uint8)(unsafe.Add(unsafe.Pointer(exportReturnArea), 24)) = pumpkin_plugin_java_packets.ClientboundPacket_Unknown
 
 			default:
 				panic("unreachable")
@@ -16781,7 +16782,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 								*(*int32)(unsafe.Add(unsafe.Pointer(base), (3 * 4))) = (payload).MetadataValue
 
 							case pumpkin_plugin_bedrock_packets.RecipeItemDescriptor_Tag:
-								payload := (element).Descriptor.Tag()
+								payload := (element).Descriptor.Tag_()
 								*(*int8)(unsafe.Add(unsafe.Pointer(base), 0)) = int8(int32(2))
 								utf81911 := unsafe.Pointer(unsafe.StringData(payload))
 								pinner.Pin(utf81911)
@@ -16985,7 +16986,7 @@ func wasm_export_wit_world_handle_event(arg0 uintptr) uintptr {
 								*(*int32)(unsafe.Add(unsafe.Pointer(base), (3 * 4))) = (payload).MetadataValue
 
 							case pumpkin_plugin_bedrock_packets.RecipeItemDescriptor_Tag:
-								payload := (element).Descriptor.Tag()
+								payload := (element).Descriptor.Tag_()
 								*(*int8)(unsafe.Add(unsafe.Pointer(base), 0)) = int8(int32(2))
 								utf81941 := unsafe.Pointer(unsafe.StringData(payload))
 								pinner.Pin(utf81941)
