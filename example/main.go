@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/Pumpkin-MC/pumpkin-api-go/api"
-	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/pumpkin_plugin_context"
-	_ "github.com/Pumpkin-MC/pumpkin-api-go/pkg/wit_exports"
+	_ "github.com/Pumpkin-MC/pumpkin-api-go/pkg/exports/wit_exports"
+	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_context"
 )
 
 type MyPlugin struct {

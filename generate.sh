@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ensure the submodule is initialized
+# Ensure the submodule is initialized (based on actual repository state)
 git submodule update --init
 
 # Generate the Go bindings
@@ -11,7 +11,6 @@ mkdir -p pkg
 # bridge code in internal/exports that maps the WIT exports to our
 # higher-level Go API in the api/ package.
 wit-bindgen go --pkg-name github.com/Pumpkin-MC/pumpkin-api-go/pkg \
-    --export-pkg-name github.com/Pumpkin-MC/pumpkin-api-go/internal/exports \
-    --out-dir pkg -w plugin wit/repo/pumpkin-plugin-wit/v0.1
+    --out-dir pkg -w plugin ./wit/repo/crates/pumpkin-plugin-wit/v0.2
 
-echo "Bindings generated successfully in pkg/"
+echo "Bindings and components generated successfully in pkg/ and wit/repo/crates/pumpkin-plugin-wit/v0.2"
