@@ -11,6 +11,7 @@ mkdir -p pkg
 # bridge code in internal/exports that maps the WIT exports to our
 # higher-level Go API in the api/ package.
 wit-bindgen go --pkg-name github.com/Pumpkin-MC/pumpkin-api-go/pkg \
-    --out-dir pkg -w plugin ./wit/repo/crates/pumpkin-plugin-wit/v0.2
+    --export-pkg-name github.com/Pumpkin-MC/pumpkin-api-go/internal/exports \
+    --out-dir pkg -w plugin ./wit/repo/v0.1
 
-echo "Bindings and components generated successfully in pkg/ and wit/repo/crates/pumpkin-plugin-wit/v0.2"
+echo "Bindings and components generated successfully in pkg/ and wit/repo/v0.1"

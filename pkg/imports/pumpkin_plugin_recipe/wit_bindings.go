@@ -6,11 +6,12 @@
 package pumpkin_plugin_recipe
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/imports/pumpkin_plugin_item_stack"
 	witRuntime "go.bytecodealliance.org/pkg/wit/runtime"
 	witTypes "go.bytecodealliance.org/pkg/wit/types"
-	"runtime"
-	"unsafe"
 )
 
 type ItemStack = pumpkin_plugin_item_stack.ItemStack
@@ -222,7 +223,7 @@ func (self *RecipeManager) RegisterShaped(id string, recipe ShapedRecipe) {
 			*(*uint32)(unsafe.Add(unsafe.Pointer(base), (3 * 4))) = uint32(uintptr(uintptr(utf82)))
 
 		case Ingredient_Tag:
-			payload := (element).F1.Tag()
+			payload := (element).F1.Tag_()
 			*(*int8)(unsafe.Add(unsafe.Pointer(base), (2 * 4))) = int8(int32(1))
 			utf83 := unsafe.Pointer(unsafe.StringData(payload))
 			pinner.Pin(utf83)
@@ -338,7 +339,7 @@ func (self *RecipeManager) RegisterShapeless(id string, recipe ShapelessRecipe) 
 			*(*uint32)(unsafe.Add(unsafe.Pointer(base), 4)) = uint32(uintptr(uintptr(utf80)))
 
 		case Ingredient_Tag:
-			payload := element.Tag()
+			payload := element.Tag_()
 			*(*int8)(unsafe.Add(unsafe.Pointer(base), 0)) = int8(int32(1))
 			utf81 := unsafe.Pointer(unsafe.StringData(payload))
 			pinner.Pin(utf81)
@@ -431,7 +432,7 @@ func (self *RecipeManager) RegisterCooking(id string, stationType CookingType, r
 		variant4 = uint32(len(payload))
 
 	case Ingredient_Tag:
-		payload := (recipe).Ingredient.Tag()
+		payload := (recipe).Ingredient.Tag_()
 		utf81 := unsafe.Pointer(unsafe.StringData(payload))
 		pinner.Pin(utf81)
 
